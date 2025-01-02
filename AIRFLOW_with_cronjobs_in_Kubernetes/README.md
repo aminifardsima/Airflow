@@ -1,5 +1,6 @@
-##Step1:
-####Write an Airflow code that already works. 
+Step1:
+
+Write an Airflow code that already works. 
 
 `vim code.py`
 
