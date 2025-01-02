@@ -1,5 +1,5 @@
 ##Step1:
-Write an Airflow code that already works. 
+####Write an Airflow code that already works. 
 `vim code.py`
 Python Code:
 ```
@@ -47,8 +47,8 @@ with DAG(
 
 
 ```
-Step 2: 
-Because in our example we are connected to mysql database then to simulate it, we install sql on another pod. Remember that this is an example but its better to make a service for our mysql database instead of making it by pod!.  Running it by a service will make it running all the time.
+##Step 2: 
+####Because in our example we are connected to mysql database then to simulate it, we install sql on another pod. Remember that this is an example but its better to make a service for our mysql database instead of making it by pod!.  Running it by a service will make it running all the time.
 `Kubectl create ns simaproject`
 `vim mysqlserver.yaml`
 
@@ -84,7 +84,7 @@ spec:
 `kubectl po -n simaproject`
 
 ##Step3:
-We make a file named `requirements.yaml` in order to call libraries that are used in the python code.
+####We make a file named `requirements.yaml` in order to call libraries that are used in the python code.
 
 Python Code:
 ```python
@@ -95,8 +95,8 @@ apache-airflow
 ```
 `kubectl apply -f requirements.yaml -n simaproject`
 
-##Step4:
-Inside the code.py change the name of the code like this to make it accessible to the container exists on your local host:
+###Step4:
+####Inside the code.py change the name of the code like this to make it accessible to the container exists on your local host:
 `vim code.py`
 
 ```
@@ -159,18 +159,18 @@ with DAG(
         python_callable=upload_data_to_mysql,
         op_args=[get_data.output],  # Pass the output of get_data_task as an argument
     )
-    get_data>>upload_data
-                                 
-                                
+    get_data>>upload_data                             
+                               
 ```
 
 
 ##Step5:
  
-We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
+####We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
 
 # Use a base Python image 
 `vim Dockerfile`
+Python Code:
 '''
 Use a base Python image with the version you need
 FROM python:3.9-slim
