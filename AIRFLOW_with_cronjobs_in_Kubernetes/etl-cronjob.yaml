@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: etl-cronjob
+  namespace: simaproject
+spec:
+  schedule: "*/5 * * * *"  # Runs every 5 minutes
+  jobTemplate:
+    spec:
+      parallelism: 2  # Number of Pods to run in parallel
+      completions: 2  # Number of completions required
+      activeDeadlineSeconds: 300  # Timeout for each job (5 minutes)
+      template:
+        spec:
+          nodeSelector:
+            kubernetes.io/hostname: minikube  # Use the 'minikube' node name
+          containers:
+            - name: python-worker
+              #image: 192.168.49.1:31326/my-python-etl-image:latest # Updated with Minikube IP
+              image: my-python-etl-image:latest
+              imagePullPolicy: Never
+                #imagePullPolicy: IfNotPresent  # Try to pull only if not already present
+              env:
+                - name: MYSQL_HOST
+                  value: "mysql-container.simaproject.svc.cluster.local"  # MySQL service hostname
+                - name: MYSQL_PORT
+                  value: "3306"
+                - name: MYSQL_USER
+                  value: "root"
+                - name: MYSQL_PASSWORD
+                  value: "1234"
+                - name: MYSQL_DATABASE
+                  value: "simadb"
+              resources:
+                requests:
+                  memory: "256Mi"  # Adjust based on your actual needs
+                  cpu: "100m"      # Further reduced CPU request (0.1 CPU cores)
+                limits:
+                  memory: "512Mi"  # Limit memory usage
+                  cpu: "200m"      # Further reduced CPU limit (0.2 CPU cores)
+          restartPolicy: Never  # Pods will not restart once the script completes
+            #imagePullSecrets:
+            #- name: my-registry-secret

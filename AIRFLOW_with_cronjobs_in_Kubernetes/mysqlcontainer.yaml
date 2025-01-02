@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-container
+  namespace: simaproject
+spec:
+  containers:
+    - name: mysql
+      image: mysql:5.7
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "1234" # Root password for MySQL
+        - name: MYSQL_DATABASE
+          value: "simadb" # Pre-created database
+      ports:
+        - containerPort: 3306 # MySQL port
+      resources:
+        requests:
+          memory: "256Mi"
+          cpu: "500m"
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
