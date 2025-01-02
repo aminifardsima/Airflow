@@ -84,7 +84,7 @@ spec:
 `kubectl po -n simaproject`
 
 ##Step3:
-####We make a file named `requirements.yaml` in order to call libraries that are used in the python code.
+####We make a file named `requirements.txt` in order to call libraries that are used in the python code.
 
 Python Code:
 ```python
@@ -95,8 +95,9 @@ apache-airflow
 ```
 `kubectl apply -f requirements.yaml -n simaproject`
 
-###Step4:
-####Inside the code.py change the name of the code like this to make it accessible to the container exists on your local host:
+Step4:
+
+Inside the code.py change the name of the code like this to make it accessible to the container exists on your local host:
 `vim code.py`
 
 ```
@@ -164,9 +165,9 @@ with DAG(
 ```
 
 
-##Step5:
+Step5:
  
-####We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
+We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
 Use a base Python image 
 `vim Dockerfile`
 
@@ -193,10 +194,11 @@ CMD ["python", "code.py"]
 
 
 `docker build -t my-python-etl-image:latest`
-##Step6:
+Step6:
+
  in this step we make an etl-cronjob.yaml file in order to make our cronjob and run it to have forexample 2 pods at the same time applying the code simultaneously.
 `vim etl-cronjob.yaml`
-
+Yaml FILE:
 ```
 apiVersion: batch/v1
 kind: CronJob
