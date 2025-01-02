@@ -167,12 +167,11 @@ with DAG(
 ##Step5:
  
 ####We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
-
-##### Use a base Python image 
+Use a base Python image 
 `vim Dockerfile`
-Python Code:
-'''
-Use a base Python image with the version you need
+
+
+```
 FROM python:3.9-slim
 
 #### Set the working directory inside the container
@@ -190,8 +189,8 @@ RUN pip install pandas sqlalchemy pymysql apache-airflow
 
 ##### Set the command to run your Python script when the container starts
 CMD ["python", "code.py"]
+```
 
-'''
 
 `docker build -t my-python-etl-image:latest`
 ##Step6:
