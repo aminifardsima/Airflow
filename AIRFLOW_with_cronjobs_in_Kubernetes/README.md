@@ -1,6 +1,8 @@
 ##Step1:
 ####Write an Airflow code that already works. 
+
 `vim code.py`
+
 Python Code:
 ```
 
@@ -47,9 +49,11 @@ with DAG(
 
 
 ```
-##Step 2: 
-####Because in our example we are connected to mysql database then to simulate it, we install sql on another pod. Remember that this is an example but its better to make a service for our mysql database instead of making it by pod!.  Running it by a service will make it running all the time.
+Step 2: 
+Because in our example we are connected to mysql database then to simulate it, we install sql on another pod. Remember that this is an example but its better to make a service for our mysql database instead of making it by pod!.  Running it by a service will make it running all the time.
+
 `Kubectl create ns simaproject`
+
 `vim mysqlserver.yaml`
 
 YAML FILE:
@@ -83,8 +87,10 @@ spec:
 `kubectl apply -f mysqlserver.yaml -n simaproject` 
 `kubectl po -n simaproject`
 
-##Step3:
-####We make a file named `requirements.txt` in order to call libraries that are used in the python code.
+Step3:
+We make a file named `requirements.txt` in order to call libraries that are used in the python code.
+
+
 
 Python Code:
 ```python
@@ -164,8 +170,10 @@ with DAG(
                                
 ```
 
+ 
 
 Step5:
+
  
 We make a Dokerfile  in order to get ready to make an image out of our code( for those working in minikube must put their image into minikube)
 Use a base Python image 
@@ -194,10 +202,15 @@ CMD ["python", "code.py"]
 
 
 `docker build -t my-python-etl-image:latest`
+
+
 Step6:
+
 
  in this step we make an etl-cronjob.yaml file in order to make our cronjob and run it to have forexample 2 pods at the same time applying the code simultaneously.
 `vim etl-cronjob.yaml`
+
+
 Yaml FILE:
 ```
 apiVersion: batch/v1
