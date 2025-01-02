@@ -48,6 +48,17 @@ with DAG(
     tags=["etl_by_airflow"],
 ) as dag:
 
+    get_data=PythonOperator(
+        task_id='get_data_from_mysql',
+        python_callable=get_data_from_mysql,
+    )
+
+    upload_data= PythonOperator(
+        task_id='upload_data_to_mysql',
+        python_callable=upload_data_to_mysql,
+        op_args=[get_data.output],  # Pass the output of get_data_task as an argument
+    )
+    get_data>>upload_data   
 
 ```
 Step 2: 
