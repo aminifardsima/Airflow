@@ -69,7 +69,7 @@ Because in our example we are connected to mysql database then to simulate it, w
 `vim mysqlserver.yaml`
 
 YAML FILE:
-```# this is Yaml file
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -118,7 +118,7 @@ Step4:
 Inside the code.py change the name of the code like this to make it accessible to the container exists on your local host:
 `vim code.py`
 
-```
+```python
 
     
 from datetime import datetime
@@ -192,7 +192,7 @@ Use a base Python image
 `vim Dockerfile`
 
 
-```
+```yaml
 # Use a base Python image with the version you need
 FROM python:3.9-slim
 
@@ -225,7 +225,7 @@ Step6:
 
 
 Yaml FILE:
-```
+```yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
