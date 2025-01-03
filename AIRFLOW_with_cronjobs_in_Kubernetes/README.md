@@ -5,7 +5,7 @@ Write an Airflow code that already works.
 `vim code.py`
 
 Python Code:
-```
+```#This is Python code
 
 from datetime import datetime
 from airflow import DAG
@@ -69,7 +69,7 @@ Because in our example we are connected to mysql database then to simulate it, w
 `vim mysqlserver.yaml`
 
 YAML FILE:
-```
+```# this is Yaml file
 apiVersion: v1
 kind: Pod
 metadata:
