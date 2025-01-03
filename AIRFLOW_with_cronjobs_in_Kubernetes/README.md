@@ -5,7 +5,7 @@ Write an Airflow code that already works.
 `vim code.py`
 
 Python Code:
-```#This is Python code
+```python
 
 from datetime import datetime
 from airflow import DAG
