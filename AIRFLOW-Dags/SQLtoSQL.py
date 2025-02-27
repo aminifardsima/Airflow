@@ -22,14 +22,14 @@ def get_data_from_mysql():
 def transformation(df):
     print(df.columns)  
     # rename_dict = {
-    #     '﻿4': 'EnrollmentID',  # This strange character in the beginning can be due to encoding issues
+    #     '﻿4': 'EnrollmentID', 
     #     '2020001': 'Registration',
     #     'CH101': 'Course_ID',
     #     '1': 'Course_taken',
     #     'A': 'Course_Grade',
     #     '12': 'GradePoints',
     #     'Distinction': 'StudentStatus',
-    #     '4': 'StudentCGPA',  # Since the first '4' is mapped to EnrollmentID, the second '4' will be mapped to StudentCGPA
+    #     '4': 'StudentCGPA', 
     #     '4_[0]': 'StudentSGPA',
     #     'Pass': 'Course_status'
     # }
@@ -68,13 +68,13 @@ with DAG(
     Transform_data= PythonOperator(
         task_id='transformation',
         python_callable=transformation,
-        op_args=[get_data.output],  # Pass the output of get_data_task as an argument
+        op_args=[get_data.output], 
     )
 
 
     upload_data= PythonOperator(
         task_id='upload_data_to_mysql',
         python_callable=upload_data_to_mysql,
-        op_args=[get_data.output],  # Pass the output of get_data_task as an argument
+        op_args=[get_data.output],  
     )
     get_data>>Transform_data>>upload_data
