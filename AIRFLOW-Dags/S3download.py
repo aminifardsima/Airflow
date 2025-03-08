@@ -12,7 +12,6 @@ def download_s3_file():
     s3_key = 'testdataframes/shop_revenue.csv'
 
 
-#    local_file_path = f'/tmp/{s3_key.split("/")[-1]}'
     local_file_path = f'/opt/airflow/dags/{s3_key.split("/")[-1]}'
 
     try:
